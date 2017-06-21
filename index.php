@@ -2,13 +2,21 @@
 
 require_once("config.php");
 
+//Carrega um usuário
+//$user = new Usuario();
+//$user->loadById(62);
+//echo $user;
 
-$user = new Usuario();
-$user->loadById(62);
+//Carega uma lista de usuários
+//$lista = Usuario::getList();
+//echo json_encode($lista);
 
-echo $user;
+//Carega uma lista de usuários buscando pelo email
+//$search = Usuario::search("c");
+//echo json_encode($search);
 
-//$usuarios = $sql->select("SELECT * FROM users");
+//Carrega um usuário pelo login
+$usuario = new Usuario();
+$usuario->login("velasco@hotelgiant.com", "123");
 
-//echo json_encode($usuarios);
-
+echo $usuario;
