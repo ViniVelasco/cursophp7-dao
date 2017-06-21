@@ -16,7 +16,12 @@ require_once("config.php");
 //echo json_encode($search);
 
 //Carrega um usuário pelo login
-$usuario = new Usuario();
-$usuario->login("velasco@hotelgiant.com", "123");
+//$usuario = new Usuario();
+//$usuario->login("velasco@hotelgiant.com", "123");
+//echo $usuario;
+
+$usuario = new Usuario("vel@vel.com", "123", "Veloso", "Vicente", "Admin", "r7.jpeg");
+$usuario->insert();
 
 echo $usuario;
+

@@ -73,15 +73,7 @@ class Usuario {
 
 		if(isset($results[0])){
 
-			$row = $results[0];
-
-			$this->setUserId($row['user_id']);
-			$this->setUserEmail($row['user_email']);
-			$this->setUserImage($row['user_image']);
-			$this->setUserRole($row['user_role']);
-			$this->setUserFirstname($row['user_firstname']);
-			$this->setUserLastname($row['user_lastname']);
-			$this->setUserPassword($row['user_password']);
+			$this->setData($results[0]);
 		}
 	}
 
@@ -108,18 +100,48 @@ class Usuario {
 
 		if(isset($results[0])){
 
-			$row = $results[0];
-
-			$this->setUserId($row['user_id']);
-			$this->setUserEmail($row['user_email']);
-			$this->setUserImage($row['user_image']);
-			$this->setUserRole($row['user_role']);
-			$this->setUserFirstname($row['user_firstname']);
-			$this->setUserLastname($row['user_lastname']);
-			$this->setUserPassword($row['user_password']);
+			$this->setData($results[0]);
 
 		} else {
 			throw new Exception("Login e/ou senha inválidos");
+		}
+
+	}
+
+	public function __construct($email = "", $senha = "", $firstname = "", $lastname = "", $role = "", $image = ""){
+		$this->setUserEmail($email);
+		$this->setUserImage($image);
+		$this->setUserRole($role);
+		$this->setUserFirstname($firstname);
+		$this->setUserLastname($lastname);
+		$this->setUserPassword($senha);
+	}
+
+	public function setData($data){
+		$this->setUserId($data['user_id']);
+		$this->setUserEmail($data['user_email']);
+		$this->setUserImage($data['user_image']);
+		$this->setUserRole($data['user_role']);
+		$this->setUserFirstname($data['user_firstname']);
+		$this->setUserLastname($data['user_lastname']);
+		$this->setUserPassword($data['user_password']);
+	}
+
+	public function insert(){
+
+		$sql = new Sql();
+
+		$results = $sql->select("CALL sp_users_insert(:user_email, :user_password, :user_firstname, :user_lastname, :user_role, :user_image)", array(
+			":user_email"=>$this->getUserEmail(),
+			":user_password"=>$this->getUserPassword(),
+			":user_firstname"=>$this->getUserFirstname(),
+			":user_lastname"=>$this->getUserLastname(),
+			":user_role"=>$this->getUserRole(),
+			":user_image"=>$this->getUserImage()
+			));
+
+		if(isset($results)){
+			$this->setData($results[0]);
 		}
 
 	}
