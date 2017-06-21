@@ -108,6 +108,22 @@ class Usuario {
 
 	}
 
+	public function delete(){
+
+		$sql = new Sql();
+
+		$sql->query("DELETE FROM users WHERE user_id = :user_id", array(
+			":user_id"=>$this->getUserId()));
+
+		$this->setUserId(0);
+		$this->setUserEmail("");
+		$this->setUserImage("");
+		$this->setUserRole("");
+		$this->setUserFirstname("");
+		$this->setUserLastname("");
+		$this->setUserPassword("");
+	}
+
 	public function update($email, $password, $firstname, $lastname, $image, $role){
 
 		$this->setUserEmail($email);
