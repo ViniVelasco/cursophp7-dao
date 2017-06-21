@@ -20,8 +20,17 @@ require_once("config.php");
 //$usuario->login("velasco@hotelgiant.com", "123");
 //echo $usuario;
 
-$usuario = new Usuario("vel@vel.com", "123", "Veloso", "Vicente", "Admin", "r7.jpeg");
-$usuario->insert();
+//Criando um novo usuário
+//$usuario = new Usuario("vel@vel.com", "123", "Veloso", "Vicente", "Admin", "r7.jpeg");
+//$usuario->insert();
+//echo $usuario;
+
+//Alterar Usuário
+$usuario = new Usuario();
+
+$usuario->loadById(64);
+
+$usuario->update("teste", "teste", "teste", "teste", "teste", "teste");
 
 echo $usuario;
 

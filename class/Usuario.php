@@ -108,6 +108,29 @@ class Usuario {
 
 	}
 
+	public function update($email, $password, $firstname, $lastname, $image, $role){
+
+		$this->setUserEmail($email);
+		$this->setUserPassword($password);
+		$this->setUserFirstname($firstname);
+		$this->setUserLastname($lastname);
+		$this->setUserImage($image);
+		$this->setUserRole($role);
+
+		$sql = new Sql();
+
+		$sql->query("UPDATE users SET user_email = :user_email, user_password = :user_password, user_firstname = :user_firstname, user_lastname = :user_lastname, user_role = :user_role, user_image = :user_image WHERE user_id = :user_id", 
+			array(
+			":user_email"=>$this->getUserEmail(),
+			":user_password"=>$this->getUserPassword(),
+			":user_firstname"=>$this->getUserFirstname(),
+			":user_lastname"=>$this->getUserLastname(),
+			":user_role"=>$this->getUserRole(),
+			":user_image"=>$this->getUserImage(),
+			":user_id"=>$this->getUserId()
+			));
+	}
+
 	public function __construct($email = "", $senha = "", $firstname = "", $lastname = "", $role = "", $image = ""){
 		$this->setUserEmail($email);
 		$this->setUserImage($image);
